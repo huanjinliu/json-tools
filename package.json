@@ -1,0 +1,127 @@
+{
+  "name": "json-tools",
+  "displayName": "json-tools",
+  "description": "A VSCode extension for convenient JSON handling",
+  "icon": "./resources/logo.png",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onDidOpenTextDocument"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "json-tools.tryMergeAllJSON",
+        "title": "合并所有带冲突JSON文件",
+        "icon": {
+          "light": "resources/merge-all-json-light.svg",
+          "dark": "resources/merge-all-json-dark.svg"
+        }
+      },
+      {
+        "command": "json-tools.tryMergeJson",
+        "title": "自动合并JSON冲突",
+        "icon": {
+          "light": "resources/merge-json-light.svg",
+          "dark": "resources/merge-json-dark.svg"
+        }
+      },
+      {
+        "command": "json-tools.tryRepairJson",
+        "title": "尝试修复JSON错误",
+        "icon": "resources/repair-json-dark.svg"
+      },
+      {
+        "command": "json-tools.sortJSONKey",
+        "title": "JSON字段排序",
+        "icon": {
+          "light": "resources/sort-json-light.svg",
+          "dark": "resources/sort-json-dark.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "json-tools.tryMergeAllJSON",
+          "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === true",
+          "group": "navigation"
+        },
+        {
+          "command": "json-tools.tryMergeJson",
+          "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === true",
+          "group": "navigation"
+        },
+        {
+          "command": "json-tools.tryRepairJson",
+          "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === false && json-tools.isValidJSONFile === false",
+          "group": "navigation"
+        },
+        {
+          "command": "json-tools.sortJSONKey",
+          "when": "resourceLangId == json && json-tools.isValidJSONFile === true",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "json-tools.tryMergeAllJSON",
+        "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === true",
+        "key": "ctrl+alt+m"
+      },
+      {
+        "command": "json-tools.tryMergeJson",
+        "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === true",
+        "key": "ctrl+m"
+      },
+      {
+        "command": "json-tools.tryRepairJson",
+        "when": "resourceLangId == json && json-tools.isNeedMergeJSONFile === false && json-tools.isValidJSONFile === false",
+        "key": "ctrl+r"
+      },
+      {
+        "command": "json-tools.sortJSONKey",
+        "when": "resourceLangId == json && json-tools.isValidJSONFile === true",
+        "key": "ctrl+s"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.91.0",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "esbuild": "^0.21.5",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "jsonrepair": "^3.8.0"
+  }
+}
