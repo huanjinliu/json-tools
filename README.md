@@ -2,7 +2,7 @@
 
 该插件在进入JSON文件编辑时功能生效，满足某些条件下将会在右上角出现对应按钮：
 
-![buttons-sample](https://github.com/huanjinliu/json-tools/blob/master/resources/buttons-sample.png?raw=true)
+![buttons-sample](https://github.com/huanjinliu/vscode-json-tools/blob/master/resources/buttons-sample.png?raw=true)
 
 1. 尝试修复JSON文件错误语法（快捷键：ctrl+r）
 

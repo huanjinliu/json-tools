@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 
 const { jsonrepair } = require("jsonrepair");
 
-const NAMESPACE = 'json-tools';
+const NAMESPACE = 'vscode-json-tools';
 
 const $ = (key: string) => `${NAMESPACE}.${key}`;
 
