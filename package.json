@@ -2,8 +2,13 @@
   "name": "json-tools",
   "displayName": "json-tools",
   "description": "A VSCode extension for convenient JSON handling",
-  "icon": "./resources/logo.png",
-  "version": "0.0.1",
+  "icon": "resources/logo.png",
+  "version": "1.0.0",
+  "author": "Hain <huanjin.liu@foxmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huanjinliu/json-tools"
+  },
   "engines": {
     "vscode": "^1.91.0"
   },
