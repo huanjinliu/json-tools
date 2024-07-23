@@ -926,10 +926,10 @@ var try_sort_json_key_default = trySortJSONKey;
 var NAMESPACE = "vscode-json-tools";
 var $ = (key) => `${NAMESPACE}.${key}`;
 var commands2 = [
-  try_merge_json_default,
-  try_merge_all_json_default,
-  try_repair_json_default,
-  try_sort_json_key_default
+  ["tryMergeJSON", try_merge_json_default],
+  ["tryMergeAllJSON", try_merge_all_json_default],
+  ["tryRepairJSON", try_repair_json_default],
+  ["trySortJSONKey", try_sort_json_key_default]
 ];
 var setExtensionContent = (editor) => {
   const document = editor?.document;
@@ -948,7 +948,7 @@ var setExtensionContent = (editor) => {
   }
 };
 function activate(context) {
-  const subscriptions = commands2.map((command) => vscode5.commands.registerCommand($(command.name), command));
+  const subscriptions = commands2.map((command) => vscode5.commands.registerCommand($(command[0]), command[1]));
   context.subscriptions.push(...subscriptions);
   vscode5.window.onDidChangeActiveTextEditor(setExtensionContent, null, context.subscriptions);
   vscode5.workspace.onDidChangeTextDocument((event) => {

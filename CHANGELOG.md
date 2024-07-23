@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.1.1] - 2024.07.23
+
+### Fixed
+
+* Fixed the problem of the plugin command not being found
+
 ## [1.1.0] - 2024.07.23
 
 ### Improved

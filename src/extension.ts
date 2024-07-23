@@ -12,11 +12,11 @@ const $ = (key: string) => `${NAMESPACE}.${key}`;
 /**
  * 命令列表
  */
-const commands = [
-	tryMergeJSON,
-	tryMergeAllJSON,
-	tryRepairJSON,
-	trySortJSONKey
+const commands: [name: string, function: () => Promise<void>][] = [
+	['tryMergeJSON', tryMergeJSON],
+	['tryMergeAllJSON', tryMergeAllJSON],
+	['tryRepairJSON', tryRepairJSON],
+	['trySortJSONKey', trySortJSONKey]
 ];
 
 /**
@@ -43,7 +43,7 @@ const setExtensionContent = (editor: vscode.TextEditor | undefined) => {
 
 export function activate(context: vscode.ExtensionContext) {
 	const subscriptions = commands.map(command => (
-		vscode.commands.registerCommand($(command.name), command)
+		vscode.commands.registerCommand($(command[0]), command[1])
 	));
 
 	context.subscriptions.push(...subscriptions);
